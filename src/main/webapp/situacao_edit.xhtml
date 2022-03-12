@@ -1,0 +1,43 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+			<p:fieldset legend="#{messages['situacao.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					
+					<h:outputLabel value="#{messages['situacao.label.codigo']}: " for="codigo" styleClass="text-input" />
+					<h:outputText id="codigo" value="#{situacaoEditMB.bean.codigo}" />
+					<p:message for="codigo" />
+					
+					<h:outputLabel value="#{messages['situacao.label.descricao']}: " for="descricao" styleClass="text-input" />
+					<h:inputText id="descricao" value="#{situacaoEditMB.bean.descricao}"
+						title="#{messages['situacao.alt.descricao']}" style="text-transform:uppercase ;" converter="upperCaseConverter"/>
+					<p:message for="descricao" />
+					
+				</h:panelGrid>
+			</p:fieldset>
+			<br />
+			<p:toolbar>
+				<f:facet name="left">
+					<p:commandButton value="#{messages['button.save']}" action="#{situacaoEditMB.insert}"
+						rendered="#{!situacaoEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.save']}" action="#{situacaoEditMB.update}"
+						rendered="#{situacaoEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.delete']}" onclick="PF('confirmation').show()"
+						rendered="#{situacaoEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" 
+						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{situacaoEditMB.delete}" immediate="true"
+							ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="PF('confirmation').hide()" type="button" />
+					</p:confirmDialog>
+					<p:commandButton value="#{messages['button.cancelar']}" action="#{situacaoEditMB.cancelar()}"
+						 ajax="false" />
+				</f:facet>
+			</p:toolbar>
+		</h:form>
+	</ui:define>
+</ui:composition>

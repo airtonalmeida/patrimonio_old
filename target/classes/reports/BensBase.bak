@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="BensBase"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="870"
+		 pageHeight="595"
+		 columnWidth="810"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="base" isForPrompting="false" class="java.lang.Long"/>
+	<queryString><![CDATA[SELECT b.TOMBO as Tombo, b.NUMERONOTAFISCAL as NotaFiscal, tb.DESCRICAO as TipoBem,
+stb.DESCRICAO as SubTipoBem, m.DESCRICAO as Marca,
+ba.DESCRICAO as Base, mi.DESCRICAO as Ministerio, r.NOME as Responsavel, s.DESCRICAO as Situacao
+FROM bens as b inner join tipos_bens as tb on
+b.cod_tipo_bem = tb.cod_tipo_bem
+inner join sub_tipos_bens as stb on
+b.cod_sub_tipo_bem = stb.cod_sub_tipo_bem
+inner join marcas as m on
+b.cod_marca = m.cod_marca
+inner join bases as ba on
+b.cod_base = ba.cod_base
+inner join ministerios as mi on
+b.cod_ministerio = mi.cod_ministerio
+inner join responsaveis as r on
+b.cod_responsavel = r.cod_responsavel
+inner join situacoes as s on
+b.cod_situacao = s.cod_situacao
+where ba.cod_base = 2]]></queryString>
+
+	<field name="Tombo" class="java.lang.String"/>
+	<field name="NotaFiscal" class="java.lang.String"/>
+	<field name="TipoBem" class="java.lang.String"/>
+	<field name="SubTipoBem" class="java.lang.String"/>
+	<field name="Marca" class="java.lang.String"/>
+	<field name="Base" class="java.lang.String"/>
+	<field name="Ministerio" class="java.lang.String"/>
+	<field name="Responsavel" class="java.lang.String"/>
+	<field name="Situacao" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="110"  isSplitAllowed="true" >
+				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="4"
+						y="3"
+						width="66"
+						height="71"
+						key="image-1"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch"/>
+					<imageExpression class="java.lang.String"><![CDATA["C:\\Users\\usuario\\desenvolvimentoJsf\\patrimonio\\src\\main\\webapp\\images\\logo.png"]]></imageExpression>
+				</image>
+				<staticText>
+					<reportElement
+						x="176"
+						y="8"
+						width="476"
+						height="29"
+						key="staticText-10"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[Igreja Batista Missionária da Independência]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="353"
+						y="57"
+						width="0"
+						height="0"
+						key="staticText-11"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Texto Estático]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="176"
+						y="42"
+						width="476"
+						height="21"
+						key="staticText-12"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="16"/>
+					</textElement>
+				<text><![CDATA[Sistema de Gestão Patrimonial]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="176"
+						y="81"
+						width="476"
+						height="21"
+						key="staticText-13"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[Relatório de Bens Por Base]]></text>
+				</staticText>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="61"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="4"
+						y="32"
+						width="43"
+						height="19"
+						key="staticText-1"/>
+					<box></box>
+					<textElement textAlignment="Left">
+						<font size="12"/>
+					</textElement>
+				<text><![CDATA[Tombo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="67"
+						y="32"
+						width="65"
+						height="19"
+						key="staticText-2"/>
+					<box></box>
+					<textElement textAlignment="Left">
+						<font size="12"/>
+					</textElement>
+				<text><![CDATA[Nota Fiscal]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="266"
+						y="32"
+						width="101"
+						height="19"
+						key="staticText-4"/>
+					<box></box>
+					<textElement textAlignment="Left">
+						<font size="12"/>
+					</textElement>
+				<text><![CDATA[Sub Tipo de Bem]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="504"
+						y="32"
+						width="62"
+						height="19"
+						key="staticText-7"/>
+					<box></box>
+					<textElement textAlignment="Left">
+						<font size="12"/>
+					</textElement>
+				<text><![CDATA[Ministério]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="619"
+						y="33"
+						width="75"
+						height="19"
+						key="staticText-8"/>
+					<box></box>
+					<textElement textAlignment="Left">
+						<font size="12"/>
+					</textElement>
+				<text><![CDATA[Responsável]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="728"
+						y="32"
+						width="52"
+						height="19"
+						key="staticText-9"/>
+					<box></box>
+					<textElement textAlignment="Left">
+						<font size="12"/>
+					</textElement>
+				<text><![CDATA[Situação]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="1"
+						y="58"
+						width="808"
+						height="0"
+						key="line-1"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="404"
+						y="31"
+						width="43"
+						height="19"
+						key="staticText-14"/>
+					<box></box>
+					<textElement textAlignment="Left">
+						<font size="12"/>
+					</textElement>
+				<text><![CDATA[Marca]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="160"
+						y="32"
+						width="91"
+						height="19"
+						key="staticText-15"/>
+					<box></box>
+					<textElement textAlignment="Left">
+						<font size="12"/>
+					</textElement>
+				<text><![CDATA[Tipo de Bem]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="4"
+						y="9"
+						width="32"
+						height="19"
+						key="staticText-16"/>
+					<box></box>
+					<textElement textAlignment="Left">
+						<font size="12"/>
+					</textElement>
+				<text><![CDATA[Base:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="37"
+						y="9"
+						width="277"
+						height="19"
+						key="textField"/>
+					<box></box>
+					<textElement verticalAlignment="Top">
+						<font size="12"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{Base}]]></textFieldExpression>
+				</textField>
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="27"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="4"
+						y="6"
+						width="53"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{Tombo}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="67"
+						y="6"
+						width="85"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{NotaFiscal}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="160"
+						y="6"
+						width="96"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{TipoBem}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="266"
+						y="6"
+						width="124"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{SubTipoBem}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="404"
+						y="6"
+						width="94"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{Marca}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="504"
+						y="6"
+						width="104"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{Ministerio}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="619"
+						y="6"
+						width="100"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{Responsavel}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="728"
+						y="6"
+						width="76"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{Situacao}]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="50"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="709"
+						y="28"
+						width="100"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+			</band>
+		</pageFooter>
+		<lastPageFooter>
+			<band height="50"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="709"
+						y="26"
+						width="100"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+			</band>
+		</lastPageFooter>
+		<summary>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

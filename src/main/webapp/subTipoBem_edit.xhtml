@@ -1,0 +1,59 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+			<p:fieldset legend="#{messages['subTipoBem.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					
+					<h:outputLabel value="#{messages['subTipoBem.label.codigo']}: " for="codigo" styleClass="text-input" />
+					<h:outputText id="codigo" value="#{subTipoBemEditMB.bean.codigo}" />
+					<p:message for="codigo" />
+					
+					<h:outputLabel value="#{messages['subTipoBem.label.descricao']}: " for="descricao" styleClass="text-input" />
+					<h:inputText id="descricao" value="#{subTipoBemEditMB.bean.descricao}"
+						title="#{messages['subTipoBem.alt.descricao']}" style="text-transform:uppercase ;" converter="upperCaseConverter" />
+					<p:message for="descricao" />
+					
+					<h:outputLabel value="#{messages['subTipoBem.label.tipoBem']}: " for="tipoBem" styleClass="text-input" />
+					<h:selectOneMenu id="tipoBem" value="#{subTipoBemEditMB.bean.tipoBem}">
+					<f:selectItem itemLabel="Selecione o Tipo do Bem" itemValue="-1" />
+						<f:selectItems value="#{subTipoBemEditMB.listTipoBem}" var="tipoBem"
+							itemValue="#{tipoBem}" itemLabel="#{tipoBem.descricao}" />
+					</h:selectOneMenu>
+					<p:message for="tipoBem" />
+					
+					<h:outputLabel value="#{messages['subTipoBem.label.classificacao']}: " for="classificacao" styleClass="text-input" />
+					<h:selectOneMenu id="classificacao" value="#{subTipoBemEditMB.bean.classificacao}">
+						<f:selectItems value="#{subTipoBemEditMB.listClassificacao}" var="classificacao"
+							itemValue="#{classificacao}" itemLabel="#{classificacao.descricao}" />
+					</h:selectOneMenu>
+					<p:message for="classificacao" />
+					
+				</h:panelGrid>
+			</p:fieldset>
+			<br />
+			<p:toolbar>
+				<f:facet name="left">
+					<p:commandButton value="#{messages['button.save']}" action="#{subTipoBemEditMB.insert}"
+						rendered="#{!subTipoBemEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.save']}" action="#{subTipoBemEditMB.update}"
+						rendered="#{subTipoBemEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.delete']}" onclick="PF('confirmation').show()"
+						rendered="#{subTipoBemEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" 
+						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{subTipoBemEditMB.delete}" immediate="true"
+							ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="PF('confirmation').hide()" type="button" />
+					</p:confirmDialog>
+					<p:commandButton value="#{messages['button.cancelar']}" action="#{subTipoBemEditMB.cancelar()}"
+						 ajax="false" />
+				</f:facet>
+			</p:toolbar>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>

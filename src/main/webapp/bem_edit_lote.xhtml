@@ -1,0 +1,167 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+	
+	<ui:define name="body">
+		
+		<h:form prependId="false">
+			
+			<p:fieldset legend="#{messages['bem.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					
+					<h:outputLabel value="#{messages['bem.label.codigo']}: " for="codigo" styleClass="text-input" />
+					<h:outputText id="codigo" value="#{bemEditLoteMB.bean.codigo}" />
+					<p:message for="codigo" />
+						
+					<h:outputLabel value="#{messages['quantidadeLote']}: " for="quantidadeLote" styleClass="text-input" />
+					<h:inputText id="quantidadeLote" value="#{bemEditLoteMB.quantidadeLote}"
+						title="#{messages['quantidadeLote']}" />
+					<p:message for="quantidadeLote" />
+					
+					<h:outputLabel value="#{messages['bem.label.numeroNotaFiscal']}: " for="numeroNotalFiscal" styleClass="text-input" />
+					<h:inputText id="numeroNotalFiscal" value="#{bemEditLoteMB.bean.numeroNotaFiscal}"
+						title="#{messages['bem.alt.numeroNotaFiscal']}" />
+					<p:message for="numeroNotalFiscal" />							
+						
+					<h:outputLabel value="#{messages['bem.label.tipoBem']}: " for="tipoBem" styleClass="text-input" />
+					<h:selectOneMenu id="tipoBem" value="#{bemEditLoteMB.bean.tipoBem}">
+					<f:selectItem itemLabel="Selecione o Tipo do Bem" itemValue="" />
+						<f:selectItems value="#{bemEditLoteMB.listTipoBem}" var="tipoBem"
+							itemValue="#{tipoBem}" itemLabel="#{tipoBem.descricao}" />
+							<p:ajax update="subTipoBem"
+                        listener="#{bemEditLoteMB.atualizaSubTipoBem}" />
+					</h:selectOneMenu>
+					<p:message for="tipoBem" />
+					
+					<h:outputLabel value="#{messages['bem.label.subTipoBem']}: " for="subTipoBem" styleClass="text-input" />
+					<h:selectOneMenu id="subTipoBem" value="#{bemEditLoteMB.bean.subTipoBem}">
+					<f:selectItem itemLabel="Selecione o Sub Tipo do Bem" itemValue="" />
+						<f:selectItems value="#{bemEditLoteMB.subTiposBensList}" var="subTipoBem"
+							itemValue="#{subTipoBem}" itemLabel="#{subTipoBem.descricao}" />
+					</h:selectOneMenu>
+					<p:message for="subTipoBem" />
+					
+					<h:outputLabel value="#{messages['bem.label.marca']}: " for="marca" styleClass="text-input" />
+					<h:selectOneMenu id="marca" value="#{bemEditLoteMB.bean.marca}">
+					<f:selectItem itemLabel="Selecione a Marca" itemValue="" />
+						<f:selectItems value="#{bemEditLoteMB.listMarca}" var="marca"
+							itemValue="#{marca}" itemLabel="#{marca.descricao}" />
+							<p:ajax update="modelo"
+                        listener="#{bemEditLoteMB.atualizaModelos}" />
+					</h:selectOneMenu>
+					<p:message for="marca" />
+						
+					<h:outputLabel value="#{messages['bem.label.modelo']}: " for="modelo" styleClass="text-input" />
+					<h:selectOneMenu id="modelo" value="#{bemEditLoteMB.bean.modelo}">
+					<f:selectItem itemLabel="Selecione o Modelo" itemValue="" />
+						<f:selectItems value="#{bemEditLoteMB.modelosList}" var="varModelo"
+							itemValue="#{varModelo}" itemLabel="#{varModelo.descricao}" />
+					</h:selectOneMenu>
+					<p:message for="modelo" />
+						
+					
+					<h:outputLabel value="#{messages['bem.label.descricao']}: " for="descricao" styleClass="text-input" />
+					<p:inputTextarea rows="5" cols="20"  maxlength="500"    
+                      autoResize="true" id="descricao" value="#{bemEditLoteMB.bean.descricao}"
+						title="#{messages['bem.alt.descricao']}" />
+					<p:message for="descricao" />
+					
+					<h:outputLabel value="#{messages['bem.label.dataCompra']}: " for="dataCompra" styleClass="text-input" />	
+					<p:inputMask id="dataCompra" value="#{bemEditLoteMB.bean.dataCompra}" mask="99/99/9999">
+					<p:ajax update="resultData,valorAtualString,dataCompra" listener="#{bemEditLoteMB.verificaData()}" />
+	               	</p:inputMask>
+	                <p:message for="dataCompra">
+	                <h:outputText id="resultData"  value="#{bemEditLoteMB.resultData}">
+	                </h:outputText> 
+					</p:message>
+					
+					<h:outputLabel value="#{messages['bem.label.valorHistorico']}: " for="valorHistoricoString" styleClass="text-input" />
+					<h:inputText id="valorHistoricoString" value="#{bemEditLoteMB.bean.valorHistoricoString}"
+						title="#{messages['bem.alt.valorHistorico']}"   >
+						<p:ajax update="valorAtualString,msgValorAtual" 
+                        listener="#{bemEditLoteMB.calculaValorAtual()}" />
+					</h:inputText>	
+  					<p:message for="valorHistoricoString" >
+					<h:outputText id="msgValorAtual"  value="#{bemEditLoteMB.msgValorAtual}">
+	                </h:outputText> 				
+					</p:message>
+					
+					
+					<h:outputLabel value="#{messages['bem.label.valorAtual']}: " for="valorAtualString" styleClass="text-input" />
+					<h:outputText id="valorAtualString" value="#{bemEditLoteMB.bean.valorAtualString}"
+						title="#{messages['bem.alt.valorAtual']}" />
+					<p:message for="valorAtualString" />
+					
+											
+					<h:outputLabel value="#{messages['bem.label.base']}: " for="base" styleClass="text-input" />
+					<h:selectOneMenu id="base" value="#{bemEditLoteMB.bean.base}">
+					<f:selectItem itemLabel="Selecione a Base" itemValue="" />
+						<f:selectItems value="#{bemEditLoteMB.listBase}" var="base"
+							itemValue="#{base}" itemLabel="#{base.descricao}" />
+							<p:ajax update="ministerio,responsavel"
+                        listener="#{bemEditLoteMB.atualizaMinisterio}" />
+					</h:selectOneMenu>
+					<p:message for="base" />
+						
+					<h:outputLabel value="#{messages['bem.label.ministerio']}: " for="ministerio" styleClass="text-input" />
+					<h:selectOneMenu id="ministerio" value="#{bemEditLoteMB.bean.ministerio}">
+					<f:selectItem itemLabel="Selecione o Ministério" itemValue="" />
+						<f:selectItems value="#{bemEditLoteMB.ministeriosList}" var="ministerio"
+							itemValue="#{ministerio}" itemLabel="#{ministerio.descricao}" />
+							<p:ajax update="responsavel"
+                        listener="#{bemEditLoteMB.atualizaResponsavel}" />
+					</h:selectOneMenu>
+					<p:message for="ministerio" />
+					
+					<h:outputLabel value="#{messages['bem.label.responsavel']}: " for="responsavel" styleClass="text-input" />
+					<h:outputText id="responsavel" value="#{bemEditLoteMB.bean.responsavel.nome}" />
+					<p:message for="responsavel" />
+					
+					<h:outputLabel value="#{messages['bem.label.localizacao']}: " for="localizacao" styleClass="text-input" />
+					<h:selectOneMenu id="localizacao" value="#{bemEditLoteMB.bean.localizacao}">
+					<f:selectItem itemLabel="Selecione a Localização" itemValue="" />
+						<f:selectItems value="#{bemEditLoteMB.listLocalizacao}" var="localizacao"
+							itemValue="#{localizacao}" itemLabel="#{localizacao.descricao}" />
+					</h:selectOneMenu>
+					<p:message for="localizacao" />			
+										
+					<h:outputLabel value="#{messages['bem.label.tipoAquisicao']}: " for="tipoAquisicao" styleClass="text-input" />
+					<h:selectOneMenu id="tipoAquisicao" value="#{bemEditLoteMB.bean.tipoAquisicao}">
+					<f:selectItem itemLabel="Selecione o Tipo de Aquisição" itemValue="" />
+						<f:selectItems value="#{bemEditLoteMB.listTipoAquisicao}" var="tipoAquisicao"
+							itemValue="#{tipoAquisicao}" itemLabel="#{tipoAquisicao.descricao}" />
+					</h:selectOneMenu>
+					<p:message for="tipoAquisicao" />
+										
+					<h:outputLabel value="#{messages['bem.label.situacao']}: " for="situacao" styleClass="text-input" />
+					<h:selectOneMenu id="situacao" value="#{bemEditLoteMB.bean.situacao}">
+					<f:selectItem itemLabel="Selecione a Situação" itemValue="" />
+						<f:selectItems value="#{bemEditLoteMB.listSituacao}" var="situacao"
+							itemValue="#{situacao}" itemLabel="#{situacao.descricao}" />
+					</h:selectOneMenu>
+					<p:message for="situacao" />
+					
+					<h:outputLabel value="#{messages['bem.label.nota']}: " for="nota" styleClass="text-input" />
+					<p:inputTextarea rows="5" cols="20"  maxlength="500"    
+                      autoResize="true" id="nota" value="#{bemEditLoteMB.bean.nota}"
+						title="#{messages['bem.alt.nota']}" />
+					<p:message for="nota" />
+										
+					
+				</h:panelGrid>
+			</p:fieldset>
+			
+			<br />
+				
+			<p:toolbar>
+				<f:facet name="left">
+				   	<p:commandButton value="#{messages['button.save']}" action="#{bemEditLoteMB.inserirLote}"
+						 ajax="false" />
+					<p:commandButton value="#{messages['button.cancelar']}" action="#{bemEditLoteMB.cancelar()}"
+						 ajax="false" />
+				</f:facet>
+			</p:toolbar>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,166 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form>
+		
+		<p:toolbar>
+				<f:facet name="left">
+								
+				   	<p:commandButton title="#{messages['button.delete']}" icon="ui-icon-trash" onclick="PF('confirmation').show()"
+						type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" 
+						header="#{messages['label.dialog.alert']}!" severity="alert" widgetVar="confirmation">
+					<h:commandButton value="#{messages['button.dialog.yes']}" action="#{consultaBemLocalizacaoMinMB.deleteSelection}"
+							actionListener="#{consultaBemLocalizacaoMinMB.clear}"  />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="PF('confirmation').hide()" type="button" />
+					</p:confirmDialog>
+				   	
+				</f:facet>
+		</p:toolbar>
+			
+			
+			<p:fieldset legend="#{messages['bem.consulta.localizacaoMinisterio']}" toggleable="true"
+				toggleSpeed="500">
+				<h:panelGrid id="fields" columns="6">
+
+					<h:outputLabel value="#{messages['bem.consulta.localizacao.label']}: "
+						for="localizacao" styleClass="text-input" />
+					<h:selectOneMenu id="localizacao" value="#{consultaBemLocalizacaoMinMB.bean.localizacao}">
+					<f:selectItem itemLabel="Selecione a Localização" itemValue="" />
+						<f:selectItems value="#{consultaBemLocalizacaoMinMB.listLocalizacao}" var="localizacao"
+							itemValue="#{localizacao}" itemLabel="#{localizacao.descricao}" />
+					</h:selectOneMenu>
+					
+					
+					<h:outputLabel value="#{messages['bem.consulta.ministerio.label']}: "
+						for="ministerio" styleClass="text-input" />
+					<h:selectOneMenu id="ministerio" value="#{consultaBemLocalizacaoMinMB.bean.ministerio}">
+					<f:selectItem itemLabel="Selecione o Ministério" itemValue="" />
+						<f:selectItems value="#{consultaBemLocalizacaoMinMB.listMinisterio}" var="ministerio"
+							itemValue="#{ministerio}" itemLabel="#{ministerio.descricao}" />
+					</h:selectOneMenu>
+										
+					
+					<p:commandButton icon="ui-icon-search"
+						action="#{consultaBemLocalizacaoMinMB.conBemLocalizacaoMin}" ajax="false" />
+					<p:message for="localizacao" />
+
+				</h:panelGrid>
+			</p:fieldset>
+            <br />
+            
+            <h:outputText value="Total dos Bens: " style="font-weight:bold;color:blue" />
+						<h:outputText value="#{consultaBemLocalizacaoMinMB.totalBens}" style="font-weight:bold;color:red" />
+						
+			 <br />		
+						
+			<h:outputText value="Total Valor Atual (R$): " style="font-weight:bold;color:blue" />
+						<h:outputText value="#{consultaBemLocalizacaoMinMB.totalValorAtual}" style="font-weight:bold;color:red" />			
+			
+			<p:dataTable id="list" var="bean" value="#{consultaBemLocalizacaoMinMB.listBem}" paginator="true" rows="10" emptyMessage=" ">
+				<f:facet name="header">#{messages['bem.list.table.title']}</f:facet>
+				
+				<p:column style="width:1%;">
+					<h:selectBooleanCheckbox value="#{consultaBemLocalizacaoMinMB.selection[bean.codigo]}"></h:selectBooleanCheckbox>
+				</p:column>
+														
+				<p:column sortBy="#{bean.tombo}" style="width:5%;">
+					<f:facet name="header"><h:outputText value="#{messages['bem.label.tombo']}"/></f:facet>
+					<h:commandLink action="#{consultaBemLocalizacaoMinMB.getNextView}" actionListener="#{consultaBemMinisterioMB.clear}">
+						<h:outputText value="#{bean.tombo}" />
+						<f:param name="id" value="#{bean.codigo}" />
+					</h:commandLink>
+				</p:column>
+				
+				<p:column sortBy="#{bean.numeroNotaFiscal}" >
+					<f:facet name="header"><h:outputText value="#{messages['bem.label.numeroNotaFiscal']}"/></f:facet>
+						<h:outputText value="#{bean.numeroNotaFiscal}" />
+						<f:param name="id" value="#{bean.codigo}" />
+				</p:column>
+				
+				<p:column sortBy="#{bean.dataCompra}" >
+					<f:facet name="header"><h:outputText value="#{messages['bem.label.dataCompra']}"/></f:facet>
+							<h:outputText value="#{bean.dataCompra}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+							<f:param name="id" value="#{bean.codigo}" />
+				</p:column>							
+						
+				<p:column sortBy="#{bean.subTipoBem}" >
+					<f:facet name="header"><h:outputText value="#{messages['bem.label.subTipoBem']}"/></f:facet>
+						<h:outputText value="#{bean.subTipoBem.descricao}" />
+						<f:param name="id" value="#{bean.codigo}" />
+				</p:column>
+				
+				<p:column sortBy="#{bean.marca}">
+					<f:facet name="header"><h:outputText value="#{messages['bem.label.marca']}"/></f:facet>
+						<h:outputText value="#{bean.marca.descricao}" />
+						<f:param name="id" value="#{bean.codigo}" />
+				</p:column>			
+			
+				<p:column sortBy="#{bean.ministerio}" >
+					<f:facet name="header"><h:outputText value="#{messages['bem.label.ministerio']}"/></f:facet>
+						<h:outputText value="#{bean.ministerio.descricao}" />
+						<f:param name="id" value="#{bean.codigo}" />
+				</p:column>
+							
+				<p:column sortBy="#{bean.localizacao}">
+					<f:facet name="header"><h:outputText value="#{messages['bem.label.localizacao']}"/></f:facet>
+						<h:outputText value="#{bean.localizacao.descricao}" />
+						<f:param name="id" value="#{bean.codigo}" />
+					
+				</p:column>
+																	
+				<p:column sortBy="#{bean.situacao}" >
+					<f:facet name="header"><h:outputText value="#{messages['bem.label.situacao']}"/></f:facet>
+						<h:outputText value="#{bean.situacao.descricao}" />
+						<f:param name="id" value="#{bean.codigo}" />
+				</p:column>
+		
+				
+				
+						
+				
+						
+			</p:dataTable>
+						
+			<p:toolbar>
+				<f:facet name="left">
+				   	<p:commandButton value="#{messages['button.exportar']}" action="#{consultaBemLocalizacaoMinMB.showReport}"
+						rendered="true" ajax="false" />
+					
+				</f:facet>
+			</p:toolbar>	
+			
+			<br />
+						            
+            <br />
+			
+			<p:fieldset legend="#{messages['bem.consulta.alterarLocalizacao']}" toggleable="true"
+				toggleSpeed="500" collapsed="true">
+				<h:panelGrid id="fields2" columns="6">
+				
+				
+				<h:outputLabel value="#{messages['bem.consulta.localizacao.label']}: "
+						for="localizacaoAlt" styleClass="text-input" />
+					<h:selectOneMenu id="localizacaoAlt" value="#{consultaBemLocalizacaoMinMB.localizacaoAlt}">
+					<f:selectItem itemLabel="Selecione a Localização" itemValue="" />
+						<f:selectItems value="#{consultaBemLocalizacaoMinMB.listLocalizacao}" var="localizacaoAlt"
+							itemValue="#{localizacaoAlt}" itemLabel="#{localizacaoAlt.descricao}" />
+				</h:selectOneMenu>
+					
+					<p:commandButton value="Executar" icon="ui-icon-refresh"
+						action="#{consultaBemLocalizacaoMinMB.alterarLocalizacao}" ajax="false" />
+					
+
+				</h:panelGrid>
+			</p:fieldset>
+			
+			
+		</h:form>
+
+	</ui:define>
+</ui:composition>

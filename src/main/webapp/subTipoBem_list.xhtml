@@ -1,0 +1,63 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form>
+			<p:toolbar>
+				<f:facet name="left">
+					<p:commandButton title="#{messages['button.new']}" icon="ui-icon-document" action="#{subTipoBemListMB.getNextView}"
+						actionListener="#{subTipoBemListMB.clear}" ajax="false" />
+
+					<p:commandButton title="#{messages['button.delete']}" icon="ui-icon-trash" onclick="PF('confirmation').show()"
+						type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" 
+						header="#{messages['label.dialog.alert']}!" severity="alert" widgetVar="confirmation">
+					<h:commandButton value="#{messages['button.dialog.yes']}" action="#{subTipoBemListMB.deleteSelection}"
+							actionListener="#{subTipoBemListMB.clear}"  />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="PF('confirmation').hide()" type="button" />
+					</p:confirmDialog>
+					
+				</f:facet>
+			</p:toolbar>
+			<p:dataTable id="list" var="bean" value="#{subTipoBemListMB.resultList}" emptyMessage=" ">
+				<f:facet name="header">#{messages['subTipoBem.list.table.title']}</f:facet>
+				<p:column style="width:1%;">
+					<h:selectBooleanCheckbox value="#{subTipoBemListMB.selection[bean.codigo]}"></h:selectBooleanCheckbox>
+				</p:column>
+				
+				<p:column style="width:5%;" sortBy="#{bean.codigo}">
+					<f:facet name="header">#{messages['subTipoBem.label.codigo']}</f:facet>
+					<h:outputText value="#{bean.codigo}" />
+				</p:column>
+						
+				<p:column sortBy="#{bean.descricao}">
+					<f:facet name="header">#{messages['subTipoBem.label.descricao']}</f:facet>
+					<h:commandLink action="#{subTipoBemListMB.getNextView}" actionListener="#{subTipoBemListMB.clear}">
+						<h:outputText value="#{bean.descricao}" />
+						<f:param name="id" value="#{bean.codigo}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.tipoBem}">
+					<f:facet name="header">#{messages['subTipoBem.label.tipoBem']}</f:facet>
+					<h:commandLink action="#{subTipoBemListMB.getNextView}" actionListener="#{subTipoBemListMB.clear}">
+						<h:outputText value="#{bean.tipoBem.descricao}" />
+						<f:param name="id" value="#{bean.codigo}" />
+					</h:commandLink>
+				</p:column>
+				
+				<p:column sortBy="#{bean.classificacao}">
+					<f:facet name="header">#{messages['subTipoBem.label.classificacao']}</f:facet>
+					<h:commandLink action="#{subTipoBemListMB.getNextView}" actionListener="#{subTipoBemListMB.clear}">
+						<h:outputText value="#{bean.classificacao.descricao}" />
+						<f:param name="id" value="#{bean.codigo}" />
+					</h:commandLink>
+				</p:column>
+						
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+			
+		<h:form>
+		
+			 <br />
+            
+            <h:outputText value="Total Valor Atual (R$): " style="font-weight:bold;color:blue" />
+						<h:outputText value="#{atualizarValorAtualBemMB.totalValorAtual}" style="font-weight:bold;color:red" />
+			
+		     <br />
+            
+            <h:outputText value="Total dos Bens: " style="font-weight:bold;color:blue" />
+						<h:outputText value="#{atualizarValorAtualBemMB.totalBens}" style="font-weight:bold;color:red" />
+						
+			 <br />		
+						
+			<h:outputText value="Total Valor Atual Recalculado (R$): " style="font-weight:bold;color:blue" />
+						<h:outputText value="#{atualizarValorAtualBemMB.totalValorAtualRecalculado}" style="font-weight:bold;color:red" />
+					
+			<br />		
+			
+			<p:toolbar>
+				<f:facet name="left">
+				   	<p:commandButton value="Atualizar Valor Atual" action="#{atualizarValorAtualBemMB.atualizaValorAtual}"
+						rendered="true" ajax="false" />
+					
+				</f:facet>
+			</p:toolbar>	
+			
+						
+		</h:form>
+
+	</ui:define>
+</ui:composition>

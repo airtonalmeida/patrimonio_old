@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:form>
+		<p:menubar>
+			
+			<p:submenu label="#{messages['menu.bem']}">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/bem_edit.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/bem_list.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.lote']}" url="/bem_edit_lote.jsf"></p:menuitem>
+				<p:menuitem value="Atualizar Valor" url="/atualizarValorAtualBem.jsf"></p:menuitem>
+			</p:submenu>
+			
+			<p:submenu label="#{messages['menu.tipoBem']}">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/tipoBem_edit.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/tipoBem_list.jsf"></p:menuitem>
+			</p:submenu>
+			
+			<p:submenu label="#{messages['menu.subTipoBem']}">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/subTipoBem_edit.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/subTipoBem_list.jsf"></p:menuitem>
+			</p:submenu>
+			
+			<p:submenu label="#{messages['menu.marca']}">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/marca_edit.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/marca_list.jsf"></p:menuitem>
+			</p:submenu>
+			
+			<p:submenu label="#{messages['menu.modelo']}">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/modelo_edit.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/modelo_list.jsf"></p:menuitem>
+			</p:submenu>
+			
+			<p:submenu label="#{messages['menu.base']}">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/base_edit.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/base_list.jsf"></p:menuitem>
+			</p:submenu>
+			
+			<p:submenu label="#{messages['menu.ministerio']}">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/ministerio_edit.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/ministerio_list.jsf"></p:menuitem>
+			</p:submenu>
+						
+			<p:submenu label="#{messages['menu.responsavel']}">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/responsavel_edit.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/responsavel_list.jsf"></p:menuitem>
+			</p:submenu>
+			
+			<p:submenu label="#{messages['menu.localizacao']}">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/localizacao_edit.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/localizacao_list.jsf"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="#{messages['menu.situacao']}">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/situacao_edit.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/situacao_list.jsf"></p:menuitem>
+			</p:submenu>
+			
+			<p:submenu label="#{messages['menu.consulta']}">
+				<p:menuitem value="#{messages['menu.menuitem.consulta.base']}" url="/consultaPorBase.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.consulta.ministerio']}" url="/consultaPorMinisterio.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.consulta.subTipoBem']}" url="/consultaPorSubTipoBem.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.consulta.responsavel']}" url="/consultaPorResponsavel.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.consulta.subTipoBemBase']}" url="/consultaPorSubTipoBemBase.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.consulta.subTipoBemMinisterio']}" url="/consultaPorSubTipoBemMinisterio.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.consulta.localizacaoMinisterio']}" url="/consultaPorLocalizacaoMinisterio.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.consulta.subTipoBemResponsavel']}" url="/consultaPorSubTipoBemResponsavel.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.relatorio.classificacao']}" url="/relatorioBensReservaValor.jsf"></p:menuitem>
+			</p:submenu>
+			
+			<p:submenu label="#{messages['menu.usuario']}">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="usuario_edit.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="usuario_list.jsf"></p:menuitem>
+			</p:submenu>
+
+			<p:menuitem value="#{messages['menu.menuitem.quit']}" url="/index.jsf"
+				action="#{securityContext.logout}" />
+		</p:menubar>
+	</h:form>
+
+</ui:composition>

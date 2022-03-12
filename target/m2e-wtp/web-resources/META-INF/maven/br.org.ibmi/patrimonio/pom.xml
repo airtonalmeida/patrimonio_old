@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>br.org.ibmi</groupId>
+	<artifactId>patrimonio</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<name></name>
+	<description></description>
+	<url></url>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<parent>
+		<groupId>br.gov.frameworkdemoiselle</groupId>
+		<artifactId>demoiselle-jsf-parent</artifactId>
+		<version>2.4.0</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>br.gov.frameworkdemoiselle</groupId>
+			<artifactId>demoiselle-jpa</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<!-- If you are using a JTA transaction then use this extension -->
+		<!--
+		<dependency>
+		    <groupId>br.gov.frameworkdemoiselle</groupId>
+		    <artifactId>demoiselle-jta</artifactId>
+		    <scope>compile</scope>
+		</dependency>
+		-->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>5.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.38</version>
+		</dependency>
+		
+
+		<dependency>
+			<groupId>br.gov.frameworkdemoiselle.component</groupId>
+			<artifactId>demoiselle-junit</artifactId>
+			<version>2.3.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>2.1.7</version>
+		</dependency>
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itext-pdfa</artifactId>
+			<version>5.5.2</version>
+		</dependency>
+	<dependency>
+	    <groupId>br.gov.frameworkdemoiselle.component</groupId>
+	    <artifactId>demoiselle-report</artifactId>
+	    <version>2.2.0</version>
+	    <type>jar</type>
+	    <scope>compile</scope>
+	</dependency>
+
+	<dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate</artifactId>
+	    <version>3.2.3.ga</version>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jdbc -->
+<dependency>
+    <groupId>org.apache.tomcat</groupId>
+    <artifactId>tomcat-jdbc</artifactId>
+    <version>7.0.72</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.clojure/java.jdbc -->
+<dependency>
+    <groupId>org.clojure</groupId>
+    <artifactId>java.jdbc</artifactId>
+    <version>0.5.7</version>
+</dependency>
+
+	
+	
+	</dependencies>
+	
+	<build>
+		<finalName>patrimonio</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+</project>
